@@ -2,6 +2,7 @@ package com.lib.danmu;
 
 import android.animation.ObjectAnimator;
 import android.content.AsyncQueryHandler;
+import android.media.browse.MediaBrowser;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.HandlerThread;
+import android.service.media.MediaBrowserService;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeechService;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        AsyncQueryHandler
-
+//        TextToSpeech
+//        TextToSpeechService
+//        MediaBrowser
+//        MediaBrowserService
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
