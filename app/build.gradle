@@ -35,6 +35,8 @@ dependencies {
     implementation('androidx.mediarouter:mediarouter:1.1.0')
     //media
     implementation "androidx.media:media:1.1.0"
+    implementation project(path: ':AndroidCodeLib')
+    implementation project(path: ':customizeview')
     def media2_version = "1.0.3"
     // Interacting with MediaSessions
     implementation "androidx.media2:media2-session:$media2_version"

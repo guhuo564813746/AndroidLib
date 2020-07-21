@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.lib.audio.ScreenRecordManager;
 
 import java.io.File;
@@ -33,7 +34,7 @@ public class ScreenRecordService extends Service implements Handler.Callback {
     private boolean isRunning=false;
     private int recordWidth;
     private int recordHeight;
-    private int mDpi=Scree;
+    private int mDpi;
     private int mResultCode;
     private Intent mResultData;
     //录制文件保存地址
@@ -57,6 +58,9 @@ public class ScreenRecordService extends Service implements Handler.Callback {
     @Override
     public void onCreate() {
         super.onCreate();
+        recordWidth= ScreenUtils.getScreenWidth();
+        recordHeight=ScreenUtils.getScreenHeight();
+        mDpi= (int) ScreenUtils.getScreenDensity();
         mediaRecorder=new MediaRecorder();
         mHandler=new Handler(Looper.getMainLooper(),this);
     }
