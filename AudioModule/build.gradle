@@ -28,4 +28,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    def media2_version = "1.0.3"
+    // Interacting with MediaSessions
+    implementation "androidx.media2:media2-session:$media2_version"
+    // optional - UI widgets for VideoView and MediaControlView
+    implementation "androidx.media2:media2-widget:$media2_version"
+    // optional - Implementation of a SessionPlayer
+    implementation "androidx.media2:media2-player:$media2_version"
 }
