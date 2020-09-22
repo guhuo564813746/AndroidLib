@@ -14,7 +14,7 @@ soundtouch::SoundTouch mSoundTouch;
 /**
  * 采样率
  */
-JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setSampleRate
+JNIEXPORT void JNICALL Java_com_zj_audiomodule_jniapi_JNISoundTouch_setSampleRate
         (JNIEnv *env, jobject obj, jint sampleRate) {
     mSoundTouch.setSampleRate(sampleRate);
 }
@@ -22,7 +22,7 @@ JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setSampleRate
 /**
  * 通道数
  */
-JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setChannels
+JNIEXPORT void JNICALL Java_com_zj_audiomodule_jniapi_JNISoundTouch_setChannels
         (JNIEnv *env, jobject obj, jint channel) {
     mSoundTouch.setChannels(channel);
 }
@@ -30,12 +30,12 @@ JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setChannels
 /**
  * 拍子
  */
-JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setTempo
+JNIEXPORT void JNICALL Java_com_zj_audiomodule_jniapi_JNISoundTouch_setTempo
         (JNIEnv *env, jobject obj, jfloat newTempo) {
     mSoundTouch.setTempo(newTempo);
 }
 
-JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setTempoChange
+JNIEXPORT void JNICALL Java_com_zj_audiomodule_jniapi_JNISoundTouch_setTempoChange
         (JNIEnv *env, jobject obj, jfloat newTempo) {
     mSoundTouch.setTempoChange(newTempo);
 }
@@ -43,7 +43,7 @@ JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setTempoChange
 /**
  * 音调
  */
-JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setPitchSemiTones
+JNIEXPORT void JNICALL Java_com_zj_audiomodule_jniapi_JNISoundTouch_setPitchSemiTones
         (JNIEnv *env, jobject obj, jint pitch) {
     mSoundTouch.setPitchSemiTones(pitch);
 }
@@ -51,18 +51,18 @@ JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setPitchSemiTones
 /**
  * 速度
  */
-JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setRate
+JNIEXPORT void JNICALL Java_com_zj_audiomodule_jniapi_JNISoundTouch_setRate
         (JNIEnv *env, jobject obj, jfloat newRate) {
     mSoundTouch.setRate(newRate);
 }
 
-JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_setRateChange
+JNIEXPORT void JNICALL Java_com_zj_audiomodule_jniapi_JNISoundTouch_setRateChange
         (JNIEnv *env, jobject obj, jfloat newRate) {
     mSoundTouch.setRateChange(newRate);
 }
 
 
-JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_putSamples
+JNIEXPORT void JNICALL Java_com_zj_audiomodule_jniapi_JNISoundTouch_putSamples
         (JNIEnv *env, jobject obj, jshortArray samples, jint len) {
 // 转换为本地数组
     jshort *input_samples = env->GetShortArrayElements(samples, NULL);
@@ -72,7 +72,7 @@ JNIEXPORT void JNICALL Java_com_amoment_audio_JNISoundTouch_putSamples
 }
 
 
-JNIEXPORT jshortArray JNICALL Java_com_amoment_audio_JNISoundTouch_receiveSamples
+JNIEXPORT jshortArray JNICALL Java_com_zj_audiomodule_jniapi_JNISoundTouch_receiveSamples
         (JNIEnv *env, jobject obj) {
     short buffer[BUFFER_SIZE];
     int nSamples = mSoundTouch.receiveSamples(buffer, BUFFER_SIZE);

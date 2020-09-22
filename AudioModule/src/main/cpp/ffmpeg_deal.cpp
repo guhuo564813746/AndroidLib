@@ -17,7 +17,7 @@ extern "C"{
 #define LOGE(FORMAT, ...) __android_log_print(ANDROID_LOG_ERROR,"LC",FORMAT,##__VA_ARGS__);
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_jinhe_ffmpegdemo_VideoView_render(JNIEnv *env, jobject obj, jstring inputStr_,
+Java_com_zj_audiomodule_jniapi_VideoView_render(JNIEnv *env, jobject obj, jstring inputStr_,
                                            jobject surface) {
 
     const char *inputPath = env->GetStringUTFChars(inputStr_, false);
