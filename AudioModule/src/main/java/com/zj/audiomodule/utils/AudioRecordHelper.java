@@ -6,20 +6,12 @@ import com.zj.audiomodule.audiomanager.RecordState;
 
 public class AudioRecordHelper {
     private volatile RecordState state=RecordState.IDLE ;
-    private AudioRecordThread audioRecordThread=null;
 
     public void startAudioRecord(){
-
+        int minBuffersize=AudioRecord.getMinBufferSize();
     }
     public void stopAudioRecord(){
 
     }
 
-    private class AudioRecordThread extends Thread{
-        private AudioRecord audioRecord;
-        private int bufferSize;
-        AudioRecordThread(){
-            bufferSize=AudioRecord.getMinBufferSize();
-        }
-    }
 }
