@@ -27,11 +27,43 @@ import java.io.IOException;
 
 public class AudioRecordHelper {
     private static final String TAG = "AudioRecordHelper";
-    private volatile RecordState state = RecordState.IDLE;
-    private AudioRecord audioRecord = null;
-    private AudioTrack audioTrack = null;
+    private static volatile RecordState state = RecordState.IDLE;
+    private static AudioRecord audioRecord = null;
+    private static AudioTrack audioTrack = null;
+    private static MediaRecorder recorder;
 
-    public void startAudioRecord(Context context, String audioName) {
+    public static void startRecordAudioByMediaRecord(String audioFileName){
+        if (recorder==null){
+            recorder=new MediaRecorder();
+        }
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFile(audioFileName);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        try {
+            recorder.prepare();
+        }catch (IOException e){
+            Log.e(TAG,"startRecordAudioByMediaRecord--"+e.getMessage());
+        }
+        recorder.start();
+    }
+
+    public static void stopRecordAudioByMediaRecord(){
+        if (recorder != null){
+            recorder.stop();
+            recorder.release();
+            recorder=null;
+        }
+    }
+
+    public static void releaseRecordAudioByMediaRecord(){
+        if (recorder != null){
+            recorder.release();
+            recorder=null;
+        }
+    }
+
+    public static void startAudioRecord(Context context, String audioName) {
         final int minBuffersize = AudioRecord.getMinBufferSize(AudioConfig.AUDIO_RATE, AudioConfig.AUDIO_CHANNEL, AudioConfig.AUDIO_FOMAT);
         if (audioRecord == null) {
             audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, AudioConfig.AUDIO_RATE,
