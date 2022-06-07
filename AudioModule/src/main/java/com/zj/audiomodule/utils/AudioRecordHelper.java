@@ -6,10 +6,12 @@ import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.AudioTrack;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 
 
@@ -31,6 +33,7 @@ public class AudioRecordHelper {
     private static AudioRecord audioRecord = null;
     private static AudioTrack audioTrack = null;
     private static MediaRecorder recorder;
+    private static MediaPlayer mMediaPlayer;
 
     public static void startRecordAudioByMediaRecord(String audioFileName){
         if (recorder==null){
@@ -48,18 +51,43 @@ public class AudioRecordHelper {
         recorder.start();
     }
 
-    public static void stopRecordAudioByMediaRecord(){
+
+    public static void releaseRecordAudioByMediaRecord(String path){
+        if (!TextUtils.isEmpty(path)){
+            File file=new File(path);
+            if (file.exists()){
+                file.delete();
+            }
+        }
         if (recorder != null){
-            recorder.stop();
             recorder.release();
             recorder=null;
         }
     }
 
-    public static void releaseRecordAudioByMediaRecord(){
-        if (recorder != null){
-            recorder.release();
-            recorder=null;
+    public static void startPlayAudio(String path){
+        try {
+            stopMediaplayer();
+            mMediaPlayer=new MediaPlayer();
+            mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mMediaPlayer.setDataSource(path);
+            mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mMediaPlayer.start();
+                }
+            });
+            mMediaPlayer.prepareAsync();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void stopMediaplayer(){
+        if (mMediaPlayer != null){
+            mMediaPlayer.release();
+            mMediaPlayer=null;
         }
     }
 
@@ -112,7 +140,13 @@ public class AudioRecordHelper {
     }
 
     /*停止录音*/
-    public void stopAudioRecord() {
+    public void stopAudioRecord(String path) {
+        if (!TextUtils.isEmpty(path)){
+            File file=new File(path);
+            if (file.exists()){
+                file.delete();
+            }
+        }
         state = RecordState.STOP;
         /*释放资源*/
         if (audioRecord != null) {

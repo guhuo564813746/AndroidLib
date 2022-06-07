@@ -1,5 +1,6 @@
 package com.lib.view.testview;
 
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -10,7 +11,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.lib.danmu.R;
+import com.lib.code.R;
+
 
 public class CircleTestView extends View {
 //    public CircleTestView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {

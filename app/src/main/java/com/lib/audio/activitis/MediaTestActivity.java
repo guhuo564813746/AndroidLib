@@ -25,7 +25,7 @@ import androidx.core.app.ActivityCompat;
 import com.lib.audio.ScreenRecordManager;
 import com.lib.audio.service.AudioBrowserService;
 import com.lib.audio.service.ScreenRecordService;
-import com.lib.danmu.R;
+import com.lib.code.R;
 
 public class MediaTestActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView mTvStart;
