@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL
 Java_com_zj_audiomodule_jniapi_VideoView_render(JNIEnv *env, jobject obj, jstring inputStr_,
                                            jobject surface) {
 
-    const char *inputPath = env->GetStringUTFChars(inputStr_, false);
+    const char *inputPath = env->GetStringUTFChars(inputStr_, JNI_FALSE);
     //注册各大组件
     LOGE("注册成功")
     AVFormatContext *avFormatContext = avformat_alloc_context();//获取上下文

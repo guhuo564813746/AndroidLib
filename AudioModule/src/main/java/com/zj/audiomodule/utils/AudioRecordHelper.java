@@ -33,14 +33,17 @@ public class AudioRecordHelper {
     private static AudioRecord audioRecord = null;
     private static AudioTrack audioTrack = null;
     private static MediaRecorder recorder;
-    private static MediaPlayer mMediaPlayer;
 
     public static void startRecordAudioByMediaRecord(String audioFileName){
+        File file =new File(audioFileName);
+        if (file.exists()){
+            file.delete();
+        }
         if (recorder==null){
             recorder=new MediaRecorder();
         }
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
         recorder.setOutputFile(audioFileName);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         try {
@@ -62,32 +65,6 @@ public class AudioRecordHelper {
         if (recorder != null){
             recorder.release();
             recorder=null;
-        }
-    }
-
-    public static void startPlayAudio(String path){
-        try {
-            stopMediaplayer();
-            mMediaPlayer=new MediaPlayer();
-            mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mMediaPlayer.setDataSource(path);
-            mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    mMediaPlayer.start();
-                }
-            });
-            mMediaPlayer.prepareAsync();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static void stopMediaplayer(){
-        if (mMediaPlayer != null){
-            mMediaPlayer.release();
-            mMediaPlayer=null;
         }
     }
 

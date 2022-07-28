@@ -21,6 +21,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.lib.audio.dialog.AudioRecordAndSendMsgDialog;
 import com.lib.code.R;
+import com.zj.audiomodule.utils.AudioPlayerHelper;
 import com.zj.audiomodule.utils.AudioRecordHelper;
 
 import java.io.File;
@@ -61,16 +62,16 @@ public class AudioRecordTestActivity extends AppCompatActivity {
         imVoicePlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AudioPlayerHelper.startPlayAudio(audioPath);
             }
         });
     }
 
     private boolean hasPermission(String permission){
         if (PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(this,permission)){
-            ActivityCompat.requestPermissions(this,new String[]{permission},AUDIO_REQUEST);
             return true;
         }else {
+            ActivityCompat.requestPermissions(this,new String[]{permission},AUDIO_REQUEST);
             return false;
         }
     }
@@ -88,7 +89,7 @@ public class AudioRecordTestActivity extends AppCompatActivity {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN :{
                 if (!hasPermission(Manifest.permission.RECORD_AUDIO)){
-                    break;
+                    return true;
                 }
                 curY=event.getY();
                 Log.d(TAG,"ACTION_DOWN--curY"+curY+"--screenHeight--"+screenHeight+"--dpi-"+ ScreenUtils.getScreenDensity()*50);
@@ -96,6 +97,10 @@ public class AudioRecordTestActivity extends AppCompatActivity {
                     tvSendAudioMsg.setVisibility(View.GONE);
                     audioRecordRoot.setVisibility(View.VISIBLE);
                     AudioRecordHelper.startRecordAudioByMediaRecord(audioPath);
+                    viewAudioControl.setBackgroundColor(getResources().getColor(R.color.green));
+                    tvSendTips.setVisibility(View.VISIBLE);
+                    viewAudioCancel.setBackgroundResource(R.mipmap.im_cancel_normal);
+                    tvCancelTips.setVisibility(View.GONE);
                 }
             }
             break;
@@ -123,6 +128,7 @@ public class AudioRecordTestActivity extends AppCompatActivity {
                 audioRecordRoot.setVisibility(View.GONE);
                 if (isInViewArea(viewAudioControl,curX,curY)){
                     Log.d(TAG,"发送语音消息");
+                    AudioRecordHelper.releaseRecordAudioByMediaRecord(null);
                 }else {
                     Log.d(TAG,"取消发送语音消息");
                     AudioRecordHelper.releaseRecordAudioByMediaRecord(audioPath);

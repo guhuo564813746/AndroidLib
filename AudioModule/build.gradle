@@ -18,12 +18,12 @@ android {
             }
         }
 
-        externalNativeBuild{
+       /* externalNativeBuild{
             cmake{
                 cppFlags "-frtti -fexceptions"
                 abiFilters 'arm64-v8a'
             }
-        }
+        }*/
 
     }
 
@@ -39,11 +39,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    externalNativeBuild{
+   /* externalNativeBuild{
         cmake{
             path "CMakeLists.txt"
         }
-    }
+    }*/
 }
 
 dependencies {
